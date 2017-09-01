@@ -1,5 +1,5 @@
 [![Release](https://jitpack.io/v/blog.codeninja/scala-js-vue.svg)]
-(https://jitpack.io/#blog.codeninja/Repo)
+(https://jitpack.io/#blog.codeninja/scala-js-vue)
 
 # ScalaJS Vue
 
