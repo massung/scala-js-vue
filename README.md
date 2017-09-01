@@ -13,7 +13,7 @@ resolvers += "jitpack" at "https://jitpack.io"
 **Step 2.** Add this repo as a dependency:
 
 ```scala
-libraryDependencies += "blog.codeninja" % "scala-js-vue" % "2.2.4"
+libraryDependencies += "blog.codeninja" % "scala-js-vue" % "2.4.2"
 ```
 
 If you'd like the latest-and-greatest version, use "master-SNAPSHOT".
