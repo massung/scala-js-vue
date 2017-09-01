@@ -6,7 +6,7 @@ import org.scalajs.dom
 
 @js.native
 @JSGlobal
-class Vue(config: js.Dictionary[js.Any]) extends js.Object {
+class Vue(config: js.Object) extends js.Object {
   val $data: js.Dynamic = js.native
 
   // read only members
