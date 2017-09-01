@@ -93,6 +93,8 @@ There, the [ScalaJS][scalajs] side of things is done. Now, let's make our HTML b
 <div v-if="list.length == 0">
     <em>Nothing to do! Add items above.</em>
 </div>
+
+<!-- loop and create a div for each task -->
 <div v-for="(task, index) in list">
     <input type="checkbox" v-model="task.done" />
     <span v-bind:class="{done: task.done}">
