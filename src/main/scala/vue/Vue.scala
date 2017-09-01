@@ -62,7 +62,7 @@ object Vue extends js.Object {
   def set[T](array: js.Array[T], key: Int, value: T): T = js.native
   def delete(obj: js.Object, key: String): Unit = js.native
   def delete[T](array: js.Array[T], key: Int): Unit = js.native
-  
+
   @js.native
   object Config extends js.Object {
     var silent: Boolean = js.native
