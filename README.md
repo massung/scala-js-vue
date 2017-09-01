@@ -49,7 +49,7 @@ class Task(val text: String val done: Boolean = false) extends js.Object
 
 object TodoApp {
     val vue = new Vue(
-        jd.Dynamic.literal(
+        js.Dynamic.literal(
             el = "#app",
 
             // This is our js.Object instance of Data.
