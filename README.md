@@ -1,7 +1,7 @@
-[ ![Release](https://jitpack.io/v/blog.codeninja/scala-js-vue.svg) ]
-(https://jitpack.io/#blog.codeninja/scala-js-vue)
-
 # ScalaJS Vue Facade
+
+[![Release](https://jitpack.io/v/blog.codeninja/scala-js-vue.svg)]
+(https://jitpack.io/#blog.codeninja/scala-js-vue)
 
 This is a [ScalaJS][scalajs] facade for [Vue.js][vue].
 
