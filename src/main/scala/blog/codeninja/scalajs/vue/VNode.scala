@@ -1,4 +1,4 @@
-package vue
+package blog.codeninja.scalajs.vue
 
 import scala.scalajs.js
 import js.annotation._
