@@ -49,22 +49,24 @@ class Task(val text: String val done: Boolean = false) extends js.Object
 
 object TodoApp {
     val vue = new Vue(
-        "el" -> "#app",
+        jd.Dynamic.literal(
+            el = "#app",
 
-        // This is our js.Object instance of Data.
-        "data" -> js.Dynamic.literal(
-            task = "",
-            list = js.Array[Task](
-                new Task("Learn Vue.js"),
-                new Task("Create reactive Scala.js app"),
-                new Task("Profit!")
+            // This is our js.Object instance of Data.
+            data = js.Dynamic.literal(
+                task = "",
+                list = js.Array[Task](
+                    new Task("Learn Vue.js"),
+                    new Task("Create reactive Scala.js app"),
+                    new Task("Profit!")
+                )
+            ),
+
+            // Reactive methods that Vue can call.
+            methods = js.Dynamic.literal(
+                addTask = addTask: js.ThisFunction0[Data, _],
+                finishTask = finishTask: js.ThisFunction1[Data, Int, _]
             )
-        ),
-
-        // Reactive methods that Vue can call.
-        "methods" -> js.Dynamic.literal(
-            addTask = addTask: js.ThisFunction0[Data, _],
-            finishTask = finishTask: js.ThisFunction1[Data, Int, _]
         )
     )
 
@@ -85,22 +87,24 @@ object TodoApp {
 There, the [ScalaJS][scalajs] side of things is done. Now, let's make our HTML body (*this is not intended to be styled or pretty, just to get the idea across and show how to use the various Vue tags*):
 
 ```html
-<div>
-    <input v-on:keyup.enter="addTask" v-model="task">
-</div>
+<div id="app">
+    <div>
+        <input v-on:keyup.enter="addTask" v-model="task">
+    </div>
 
-<!-- special text if there are no todo items -->
-<div v-if="list.length == 0">
-    <em>Nothing to do! Add items above.</em>
-</div>
+    <!-- special text if there are no todo items -->
+    <div v-if="list.length == 0">
+        <em>Nothing to do! Add items above.</em>
+    </div>
 
-<!-- loop and create a div for each task -->
-<div v-for="(task, index) in list">
-    <input type="checkbox" v-model="task.done" />
-    <span v-bind:class="{done: task.done}">
-        {{ task.text }}
-    </span>
-    <button v-on:click="delTask(index)">Remove</button>
+    <!-- loop and create a div for each task -->
+    <div v-for="(task, index) in list">
+        <input type="checkbox" v-model="task.done" />
+        <span v-bind:class="{done: task.done}">
+            {{ task.text }}
+        </span>
+        <button v-on:click="delTask(index)">Remove</button>
+    </div>
 </div>
 ```
 
