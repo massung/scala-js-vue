@@ -24,7 +24,6 @@ Here's a basic "TODO" app skeleton.
 
 ```scala
 import scala.scalajs.js
-import js.annotation._
 import blog.codeninja.scalajs.vue._
 
 /* First create a trait that will be the $data member of our Vue
