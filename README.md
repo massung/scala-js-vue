@@ -27,10 +27,10 @@ import scala.scalajs.js
 import blog.codeninja.scalajs.vue._
 
 /* First create a trait that will be the $data member of our Vue
- * instance. It doesn't need to be `@js.native` since we don't
+ * instance. It doesn't need to be @js.native since we don't
  * intend to expose it to any JavaScript code. Instead, it's just
  * a trait of data members that we can use in templating our
- * Vue methods of type `js.ThisFunctionN[..]`.
+ * Vue methods of type js.ThisFunctionN[..].
  */
 
 trait Data extends Vue {
