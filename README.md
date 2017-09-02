@@ -33,7 +33,7 @@ import blog.codeninja.scalajs.vue._
  * Vue methods of type js.ThisFunctionN[..].
  */
 
-trait Data extends Vue {
+trait Data extends js.Object {
     var task: String
     var list: js.Array[Task]
 }
