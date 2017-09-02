@@ -28,47 +28,54 @@ import js.annotation._
 import blog.codeninja.scalajs.vue._
 
 /* First create a trait that will be the $data member of our Vue
- * instance. Vue is a subclass js.Object, so when we create methods
- * that take Data as an argument, they can be called from the Vue
- * core.
+ * instance. It doesn't need to be `@js.native` since we don't
+ * intend to expose it to any JavaScript code. Instead, it's just
+ * a trait of data members that we can use in templating our
+ * Vue methods of type `js.ThisFunctionN[..]`.
  */
 
-@js.native
 trait Data extends Vue {
-    var task: String = js.native
-    var list: js.Array[Task] = js.native
+    var task: String
+    var list: js.Array[Task]
 }
 
-/* Next, we define a Task object, inherited from js.Object.
+/* Next, we define a Task object. It needs to be derived from
+ * js.Object, because the Vue object will access it from HTML.
  */
 
-class Task(val text: String val done: Boolean = false) extends js.Object
+class Task(var text: String var done: Boolean = false) extends js.Object
 
 /* Finally, let's create our application.
  */
 
 object TodoApp {
-    val vue = new Vue(
-        js.Dynamic.literal(
-            el = "#app",
+    var vue: Vue = _
 
-            // This is our js.Object instance of Data.
-            data = js.Dynamic.literal(
-                task = "",
-                list = js.Array[Task](
-                    new Task("Learn Vue.js"),
-                    new Task("Create reactive Scala.js app"),
-                    new Task("Profit!")
+    // Create the application entry point.
+    def main(args: Array[String]) = {
+        vue = new Vue(
+            js.Dynamic.literal(
+                el = "#app",
+
+                // This is our js.Object instance of Data.
+                data = js.Dynamic.literal(
+                    task = "",
+                    list = js.Array[Task](
+                        new Task("Learn Vue.js"),
+                        new Task("Create reactive Scala.js app"),
+                        new Task("Profit!")
+                    )
+                ),
+
+                // Reactive methods that Vue can call.
+                methods = js.Dynamic.literal(
+                    addTask = addTask: js.ThisFunction0[Data, _],
+                    rmTask = rmTask: js.ThisFunction1[Data, Int, _],
+                    toggleTask = toggleTask: js.ThisFunction1[Data, Int, _]
                 )
-            ),
-
-            // Reactive methods that Vue can call.
-            methods = js.Dynamic.literal(
-                addTask = addTask: js.ThisFunction0[Data, _],
-                finishTask = finishTask: js.ThisFunction1[Data, Int, _]
             )
         )
-    )
+    }
 
     // This is called from JS through methods when the ENTER key is
     // pressed while focused on the input text field.
@@ -79,12 +86,12 @@ object TodoApp {
         }
     
     // This is called from JS through the "remove" button.
-    def delTask(data: Data, index: Int): Unit =
+    def rmTask(data: Data, index: Int): Unit =
         data.list.splice(index, 1)
 }
 ```
 
-There, the [ScalaJS][scalajs] side of things is done. Now, let's make our HTML body (*this is not intended to be styled or pretty, just to get the idea across and show how to use the various Vue tags*):
+There, the [ScalaJS][scalajs] side of things is done. Now, let's make our HTML body (*this is intentionally not styled or pretty as opposed to slim to be readable, showing how to use various Vue tags*):
 
 ```html
 <div id="app">
@@ -103,7 +110,7 @@ There, the [ScalaJS][scalajs] side of things is done. Now, let's make our HTML b
         <span v-bind:class="{done: task.done}">
             {{ task.text }}
         </span>
-        <button v-on:click="delTask(index)">Remove</button>
+        <button v-on:click="rmTask(index)">Remove</button>
     </div>
 </div>
 ```
