@@ -123,7 +123,7 @@ Here's an example of how to install and use a [Vue][vue] plugin. In this example
 **Step 1.** Add the JavaScript dependency:
 
 ```scala
-jsDependencies += "org.webjars.npm" % "vue-async-computed" % "3.3.0" / "dist/index.js" commonJSName "AsyncComputed"
+jsDependencies += "org.webjars.npm" % "vue-async-computed" % "3.3.0" / "dist/vue-async-computed.js" commonJSName "AsyncComputed"
 ```
 
 **Step 2. (Option A)** If you need a facade for the plugin, derive from `PluginObject[T]` using the `commonJSName` used for the `jsDependency`:
