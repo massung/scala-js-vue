@@ -116,6 +116,44 @@ There, the [ScalaJS][scalajs] side of things is done. Now, let's make our HTML b
 
 That's it. Launch the application and start completing tasks!
 
+## How To Use A Vue.js Plugin
+
+Here's an example of how to install and use a [Vue][vue] plugin. In this example, we'll use the [vue-async-computed][async] plugin.
+
+**Step 1.** Add the JavaScript dependency:
+
+```scala
+jsDependencies += "org.webjars.npm" % "vue-async-computed" % "3.3.0" / "dist/index.js" commonJSName "AsyncComputed"
+```
+
+**Step 2. (Option A)** If you need a facade for the plugin, derive from `PluginObject[T]` using the `commonJSName` used for the `jsDependency`:
+
+```scala
+@js.native
+@JSGlobal
+object AsyncComputed extends PluginObject[js.Any] {
+    // TOOD: facade members and methods here...
+}
+```
+
+**Step 2. (Option B)** If you don't need a facade, then you can just find the plugin in the global scope use the `commonJSName`:
+
+```scala
+val AsyncComputed = g.selectDynamic("AsyncComputed").asInstanceOf[PluginObject[js.Any]]
+```
+
+**Step 3.** Call `Vue.use` with your plugin:
+
+```scala
+val options = js.Dynamic.literal(
+    // TODO: put any plugin install options here...
+)
+
+Vue.use(AsyncComputed, options)
+```
+
+You should be ready to roll...
+
 ## That's It
 
 If you find a bug or have suggestions on how to improve the facade (specifically adding some more type safety where possible), please open an issue and tell me about it.
@@ -126,3 +164,4 @@ Hope you find this helpful!
 [sbt]:          http://www.scala-sbt.org
 [vue]:          https://vuejs.org
 [jitpack]:      https://jitpack.io
+[async]:        https://github.com/foxbenjaminfox/vue-async-computed
