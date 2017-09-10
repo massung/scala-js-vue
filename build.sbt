@@ -14,5 +14,5 @@ libraryDependencies ++= Seq(
 
 // javascript sources
 jsDependencies ++= Seq(
-  "org.webjars" % "vue" % "2.4.2" / "vue.js" commonJSName "Vue"
+  "org.webjars.npm" % "vue" % "2.4.2" / "dist/vue.js" minified "dist/vue.min.js" commonJSName "Vue"
 )
